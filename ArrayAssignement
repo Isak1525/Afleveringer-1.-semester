@@ -1,0 +1,77 @@
+import java.util.Arrays;
+
+public class Arrayassignement {
+    public static void main(String[] args) {
+        // Opgave 1:
+        int[] numbers = {1, 2, 3, 4, 5, 5, 6, 7, 7, 7};
+        System.out.println("Reverse array: ");
+        printReverse(numbers);
+
+        // Opgave 2:
+        System.out.println(count(numbers, 5));
+        System.out.println(count(numbers, 2));
+        System.out.println(count(numbers, 7));
+
+        // Opgave 3:
+        String[] names = {"John", "Jane", "Michael", "unknown"};
+        replaceAll(names, "unknown", "Luca");
+
+        // Printer vores array til Strings via nedenstående tilgang:
+        System.out.println(Arrays.toString(names));
+
+
+        // Opgave 4:
+        String[] strArr = {"hello", "world", "from", "an", "array"};
+        System.out.println(indexOf(strArr, "an"));
+        System.out.println(indexOf(strArr, "arrays"));
+
+    }
+
+
+    // Opgave 1 - printReverse med int som parameter:
+    public static void printReverse(int[] arr) {
+        for (int i = arr.length - 1; i >= 0; i--) {
+            System.out.println(arr[i]);
+
+        }
+        System.out.println();
+
+    }
+
+
+    // Opgave 2 - Count metode:
+    public static int count(int[] arr, int target) {
+        // Vi initialiserer en tæller som holder styr på hvor mange gange vores target forekommer:
+        int count = 0;
+        // For each loop: For hvert tal i arrayet tjekker vi, om det er lig med target. Hvis det er, øger vi tælleren count med 1.
+        for (int numbers : arr) {
+            if (numbers == target) {
+                count ++;
+            }
+        }
+        return count;
+    }
+
+
+    // Opgave 3 - Replace metode som erstatter alle vores target med vores replacements
+    public static void replaceAll(String[] arr, String target, String replacement) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(target)) {
+                arr[i] = replacement;
+            }
+        }
+    }
+
+
+    // Opgave 4 -
+    public static int indexOf(String[] arr, String target) {
+        // for loop - Første forekomst af target i et String array. Hvis target ikke findes, returneres -1.
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(target)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
