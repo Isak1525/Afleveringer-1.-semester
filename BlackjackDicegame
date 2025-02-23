@@ -1,0 +1,81 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class BlackjackDiceGame {
+    public static void main(String[] args) {
+
+        // Random numbers og Scanner tilføjet i vores main så vi kan henvende os dem i vores metoder længere ned.
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+
+        // Introduktion til spillet
+        System.out.println("Welcome to the Blackjack Dice Game! ");
+        System.out.println("Do you wish to play? y/n ");
+        scanner.next();
+
+        int userSum = firstRoll(random);
+        System.out.println("You rolled: " + userSum);
+
+        // Vi laver if statements til vores bruger inputs inde i vores while loop
+        while (userSum < 21) {
+            System.out.println("Do you want to roll again? y/n ");
+            String choice = scanner.next();
+
+            if (choice.equals("y")) {
+                int roll = secondRoll(random);
+                userSum += roll;
+                System.out.println("You rolled: " + roll + " " + "Total: " + userSum);
+
+                if (userSum > 21) {
+                    System.out.println("You exceeded 21. You lose! ");
+                    return;
+                } else if (userSum == 21) {
+                    System.out.println("Blackjack you win! ");
+                    return;
+                }
+
+            } else {
+                break; // Vi laver et break for at stoppe loopet når brugeren ikke vil spille mere
+            }
+        }
+
+
+        // Vi skal nu lave if statements igen men nu for maskinens inputs:
+        int machineSum = firstRoll(random);
+        System.out.println("Machine rolled " + machineSum);
+
+        // Vi følger nogenlunde samme mønster som for userthrows:
+        // Vi skal huske at maskinen stopper med at slå hvis den rammer 16 eller over:
+
+        while (machineSum < 16) {
+            int roll = secondRoll(random);
+            machineSum += roll;
+            System.out.println("Machine rolled: " + roll + " " + "Total: " + machineSum);
+        }
+        // Round stats:
+        System.out.println("Final Scores:");
+        System.out.println("Your total: " + userSum);
+        System.out.println("Machine total: " + machineSum);
+
+        if (machineSum > 21) {
+            System.out.println("Machine exceeded 21. You win!! ");
+        } else if (machineSum == userSum) {
+            System.out.println("Draw!! Machine wins! ");
+        } else if (machineSum > userSum) {
+            System.out.println("Machine wins! ");
+        } else {
+            System.out.println(" You win! ");
+        }
+
+    }
+
+    public static int firstRoll(Random random) {
+       return random.nextInt(1, 7) +  random.nextInt(1, 7);
+
+    }
+
+    public static int secondRoll(Random random) {
+        return  random.nextInt(1, 7);
+    }
+
+}
